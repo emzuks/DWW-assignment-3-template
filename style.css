@@ -1,3 +1,5 @@
+
+
 /* reset predefined styles */
 *{
     margin: 0;
@@ -8,11 +10,16 @@
 /* set variables for colors and spaces */
 :root{
 
-    --c-main : #FF7400;
-    --c-sec-100 : #FFFFFF;
-    --c-sec-200 : #F9F9F9;
-    --c-sec-500 : #BABABA;
-    --c-sec-900 : #141414; 
+    --c-background : #FAFAFA;
+    --c-green-dark : #496039;
+    --c-green-light : #D7E2CF;
+    --c-blue-dark : #366363;
+    --c-blue-light : #CDE4E4; 
+    --c-grey : #E6E6E6;
+    --c-black : #0D0D0D;
+    --c-red-dark : #7B1E1E;
+    --c-red-light : #F5D6D6;
+
 
     --space-05 : .5em;
     --space-1 : 1em;
@@ -20,6 +27,8 @@
     --space-3 : 3em;
     --space-4 : 4em;
 
+  --radius: 18px;
+  --shadow: 0 2px 10px rgba(0,0,0,.06);
 }
 
 /* class utilities for flexbox */
@@ -54,14 +63,143 @@
   align-items: flex-end;
 }
 
+  /* base font size and family */
 
-body {
-
-
-    /* base font size and family */
+body {  
     font-size : 16px;
     font-family: "Inter", sans-serif;
 
-    /* how to use variables */
-    background-color : var(--c-sec-100);
+    /* how to use variables*/
+    background-color : var(--c-background);
+}
+
+
+
+
+/* look at the desktop size 402x874px to get identical size on figma */
+/* HERE STARTS THE ACTUAL CODE (hopefully) */
+
+/* ############# here i format the text ######################*/
+
+h1 { 
+  font-size: 32px; 
+  font-weight: 900; 
+  margin: 0; }
+
+h2 { font-size: 24px; 
+  font-weight: 800; 
+  margin: 0; }
+
+h3 { font-size: 16px; 
+  font-weight: 600; 
+  margin: 0; }
+.muted { font-size: 12px; color: #6B6B6B; }
+
+
+
+
+/* ############################### LAYOUT ########################## */
+section {
+  max-width: 420px;            /* keeps the phone centered on page */
+  margin: 28px auto;
+  padding: 0 12px;
+}
+
+/* ############################### PHONE CARD ####################### */
+.phone{
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+/* top bar */
+.status{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chip{
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--c-green-dark);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--c-green-dark);
+}
+
+/* make lucide icons fit inside chips */
+.chip i[data-lucide]{
+  width: 16px;
+  height: 16px;
+}
+
+/* headings */
+.title{ margin-top: 8px; color: var(--c-green-dark); }
+.subtitle{ margin-top: 6px; color: #1c361c; font-weight: 800; }
+
+/* labels and gauge */
+.labels{
+  position: relative;
+  margin-top: 14px;
+  height: 0; /* we position text around the gauge, so no flow height */
+}
+.labels span{
+  position: absolute;
+  left: 0;
+  font-weight: 800;
+  color: #6C7D6B;
+}
+.labels .top{ top: 8px; }
+.labels .mid{ top: calc(50% + 8px); transform: translateY(-50%); color: var(--c-green-dark); }
+.labels .bot{ bottom: -520px; } /* aligns with bottom of the gauge */
+
+/* container around the gauge to leave space for labels on the left */
+.gauge-wrap{
+  position: relative;
+  padding-left: 88px; /* space for labels */
+  margin-top: 8px;
+}
+
+/* the gradient “tube” with a wave cap */
+.gauge{
+  position: relative;
+  height: 520px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #E2EBEE 0%, #FFFFFF 92%);
+}
+
+/* wave cap graphic (inline SVG as background) */
+.gauge::before{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 84px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120"><path d="M0,72 C60,105 120,20 200,60 C280,100 340,40 400,74 L400,0 L0,0 Z" fill="%23DCE8EA"/></svg>') no-repeat top center;
+  background-size: cover;
+  opacity: .9;
+}
+
+/* pointer pill */
+.pointer{
+  position: absolute;
+  right: -14px;
+  top: 54%;
+  transform: translateY(-50%);
+  width: 62px;
+  height: 24px;
+  border-radius: 22px;
+  background: var(--c-green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* pointer arrow icon color/size */
+.pointer i[data-lucide]{
+  width: 16px;
+  height: 16px;
+  color: #fff;
 }
