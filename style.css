@@ -75,131 +75,112 @@ body {
 
 
 
-
-/* look at the desktop size 402x874px to get identical size on figma */
-/* HERE STARTS THE ACTUAL CODE (hopefully) */
-
-/* ############# here i format the text ######################*/
-
-h1 { 
-  font-size: 32px; 
-  font-weight: 900; 
-  margin: 0; }
-
-h2 { font-size: 24px; 
-  font-weight: 800; 
-  margin: 0; }
-
-h3 { font-size: 16px; 
-  font-weight: 600; 
-  margin: 0; }
-.muted { font-size: 12px; color: #6B6B6B; }
-
-
-
-
-/* ############################### LAYOUT ########################## */
-section {
-  max-width: 420px;            /* keeps the phone centered on page */
-  margin: 28px auto;
-  padding: 0 12px;
-}
-
-/* ############################### PHONE CARD ####################### */
-.phone{
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-  padding: 18px;
-}
-
-/* top bar */
-.status{
+/* ===== header row (icons) ===== */
+.status {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  padding: 6px 2px;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #FAFAFA;
+  color: var(--c-green-dark);
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
-.chip{
-  width: 28px;
-  height: 28px;
-  border: 2px solid var(--c-green-dark);
-  border-radius: 50%;
+
+/* ===== headings ===== */
+.heading-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+.muted {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* ===== two-column area ===== */
+.gauge-grid {
   display: grid;
-  place-items: center;
+  grid-template-columns: 1fr auto; /* left grows, right fits pointer */
+  column-gap: 20px;
+  align-items: start;
+  margin-top: 12px;
+}
+
+.gauge-left { padding-left: 90px; }   /* left padding from edge */
+
+/*.gauge-right {
+  display: flex;
+  align-items: center;  /* roughly centers to the “Perfect” line
+  min-width: 72px;
+}*/
+.pointer { width: 72px; height: auto; }
+
+/* ===== gauge stack ===== */
+.scale-top{
+  font-weight: 800;
+  text-align: center;
+  margin: 10px 0 6px;
   color: var(--c-green-dark);
 }
 
-/* make lucide icons fit inside chips */
-.chip i[data-lucide]{
-  width: 16px;
-  height: 16px;
+
+/* water image as background (use correct filename/casing) */
+#water-bg{
+  background-image: url("assets/water.png"); /* or assets/Water.svg if that’s the file */
+  background-repeat: no-repeat;
+  background-position: top center;
+  width: 100%;
+  height: 30em;          /* gauge height */
+  /* optional rounded look if your PNG is rectangular */
+  /* border-radius: 12px; */
 }
 
-/* headings */
-.title{ margin-top: 8px; color: var(--c-green-dark); }
-.subtitle{ margin-top: 6px; color: #1c361c; font-weight: 800; }
-
-/* labels and gauge */
+/* overlayed labels (“Perfect”, “Too dry”) */
 .labels{
-  position: relative;
-  margin-top: 14px;
-  height: 0; /* we position text around the gauge, so no flow height */
-}
-.labels span{
-  position: absolute;
-  left: 0;
-  font-weight: 800;
-  color: #6C7D6B;
-}
-.labels .top{ top: 8px; }
-.labels .mid{ top: calc(50% + 8px); transform: translateY(-50%); color: var(--c-green-dark); }
-.labels .bot{ bottom: -520px; } /* aligns with bottom of the gauge */
-
-/* container around the gauge to leave space for labels on the left */
-.gauge-wrap{
-  position: relative;
-  padding-left: 88px; /* space for labels */
-  margin-top: 8px;
-}
-
-/* the gradient “tube” with a wave cap */
-.gauge{
-  position: relative;
-  height: 520px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #E2EBEE 0%, #FFFFFF 92%);
-}
-
-/* wave cap graphic (inline SVG as background) */
-.gauge::before{
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 84px;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120"><path d="M0,72 C60,105 120,20 200,60 C280,100 340,40 400,74 L400,0 L0,0 Z" fill="%23DCE8EA"/></svg>') no-repeat top center;
-  background-size: cover;
-  opacity: .9;
-}
-
-/* pointer pill */
-.pointer{
-  position: absolute;
-  right: -14px;
-  top: 54%;
-  transform: translateY(-50%);
-  width: 62px;
-  height: 24px;
-  border-radius: 22px;
-  background: var(--c-green-dark);
   display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centers to midline */
   align-items: center;
-  justify-content: center;
+  gap: 1em;
+}
+.labels .mid{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  /* perfect center */
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
 }
 
-/* pointer arrow icon color/size */
-.pointer i[data-lucide]{
-  width: 16px;
-  height: 16px;
-  color: #fff;
+.labels .bot{ font-weight: 800; }
+
+/* BACK ARROW (no border) */
+.back-icon {
+  bottom: 24px;
+  left: 24px;
+  width: 40px;
+  height: 40px;
+  color: var(--c-green-dark);
 }
