@@ -1,4 +1,5 @@
 
+/* when inspect make size 313x741 */
 
 /* reset predefined styles */
 *{
@@ -125,8 +126,9 @@ body {
   align-items: start;
   margin-top: 12px;
 }
+.gauge-right {position: relative;}
 
-.gauge-left { padding-left: 90px; }   /* left padding from edge */
+.gauge-left { padding-left: 22px; }   /* left padding from edge i try to eyeball and center it */
 
 .pointer { width: 72px; height: auto; }
 
